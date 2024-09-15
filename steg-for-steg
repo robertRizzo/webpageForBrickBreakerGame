@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steg-för-Steg - Utveckling av Brick Breaker Spelet</title>
+    <link rel="stylesheet" href="style.css"> <!-- Länkar till CSS-filen för styling -->
+</head>
+<body>
+    <header>
+        <h1>Steg-för-Steg</h1>
+        <hr>
+        <nav>
+            <ul>
+                <!-- Navigationslänkar för olika sidor i projektet -->
+                <li><a href="index.html">Startsida</a></li>
+                <br>
+                <li><a href="presentation.html">Presentation</a></li>
+                <li><a href="redovisning.html">Redovisning</a></li>
+                <li><a href="steg-for-steg.html">Steg-för-Steg</a></li>
+                <li><a href="kallredovisning.html">Källhänvisning</a></li>
+                <hr>
+            </ul>
+            <ul>
+                <!-- Länk till det faktiska Brick Breaker-spelet -->
+                <li><a href="../project/index.html">Brick Breaker Game</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h1>Steg för Steg Guide - Utveckling av Brick Breaker Spelet</h1>
+            <p>
+                Under utvecklingen av mitt Brick Breaker-spel använde jag Agile-metoden.
+                Denna metod lät mig vara flexibel och göra förbättringar i varje steg av processen.
+                Jag utgick från två huvudsakliga källor: en hemsida med ett färdigt projekt och en YouTube-tutorial som visade hur man skapar spelet.
+                Dessa källor hjälpte mig att ställa rätt frågor och bygga upp min egen version av spelet. Här är en steg-för-steg-guide över hur jag arbetade:
+            </p>
+            <p>För att se den kompletta koden, klicka på följande länkar:</p>
+            <ul>
+                <li><a href="project.html.txt">HTML-kod (index.html)</a></li>
+                <li><a href="project.css.txt">CSS-kod (style.css)</a></li>
+                <li><a href="project.js.txt">JavaScript-kod (script.js)</a></li>
+            </ul>
+            <h1>Reflektion och Frågor om Kodens Funktioner</h1>
+            <p>
+                När jag gick igenom mina inspirationskällor och arbetade med koden för mitt projekt,
+                ställde jag mig flera frågor för att förstå hur varje del fungerar och hur jag skulle kunna använda den på bästa sätt.
+                Att skriva ner dessa frågor hjälpte mig att få en tydlig översikt över vad jag behövde göra och hur jag skulle gå tillväga.
+            </p>
+    
+            <p>
+                Jag rekommenderar att du också skriver ner de frågor som dyker upp när du går igenom min kod eller din egen kod.
+                Detta är ett bra sätt att identifiera vad som är viktigt att förstå och hur du kan utveckla din egen lösning.
+                Här är några av de frågor jag ställde mig när jag arbetade med mitt projekt:
+            </p>
+    
+            <h2>Initialisering och Konfiguration:</h2>
+            <ul>
+                <!-- Frågor om hur spelet initialiseras och konfigureras -->
+                <li><strong>DOMContentLoaded (event handler):</strong><br> Hur ser jag till att spelet startar när hela sidan är klar?</li>
+                <li><strong>startGame():</strong><br> Hur sätter jag igång spelet?</li>
+                <li><strong>initializeGame():</strong><br> Vad behöver jag göra för att förbereda spelet så att det kan börja?</li>
+                <li><strong>resetBallAndPaddle(canvas):</strong><br> Hur ser jag till att bollen och paddeln återgår till sina startpositioner?</li>
+                <li><strong>randomizeBallDirection():</strong><br> Hur får jag bollen att röra sig i en slumpmässig riktning när spelet startar?</li>
+                <li><strong>applySpeedToBall(speed):</strong><br> Hur ger jag bollen rätt hastighet?</li>
+                <li><strong>initializeBricks():</strong><br> Hur placerar jag ut klossarna så att spelet ser bra ut?</li>
+                <li><strong>drawInitialScreen(ctx):</strong><br> Hur ritar jag första skärmen så att spelaren vet att spelet är klart att börja?</li>
+            </ul>
+
+            <h2>Datahantering:</h2>
+            <ul>
+                <!-- Frågor om hur data hanteras i spelet -->
+                <li><strong>config (variabel):</strong><br> Vad ligger i config, och hur används det i spelet?</li>
+                <li><strong>gameState (variabel):</strong><br> Vad betyder gameState, och hur hjälper det mig att hålla koll på hur spelet går?</li>
+            </ul>
+
+            <h2>Ritning och Grafik:</h2>
+            <ul>
+                <!-- Frågor om hur olika delar av spelet ritas och visas -->
+                <li><strong>drawBall(ctx):</strong><br> Hur ritar jag bollen så att den syns på skärmen?</li>
+                <li><strong>drawPaddle(ctx):</strong><br> Hur ritar jag paddeln så att den är tydlig för spelaren?</li>
+                <li><strong>drawBricks(ctx):</strong><br> Hur ritar jag klossarna så att de syns på rätt sätt?</li>
+                <li><strong>drawUsername(ctx):</strong><br> Hur visar jag spelarnamnet på skärmen?</li>
+                <li><strong>drawScore(ctx):</strong><br> Hur visar jag poängen så att spelaren kan se den?</li>
+                <li><strong>drawLives(ctx):</strong><br> Hur visar jag hur många liv spelaren har kvar?</li>
+                <li><strong>drawStars(starCtx):</strong><br> Hur ritar jag stjärnorna på skärmen?</li>
+                <li><strong>draw(ctx):</strong><br> Hur ritar jag hela spelområdet med alla delar på plats?</li>
+            </ul>
+
+            <h2>Event Listeners och Hantering:</h2>
+            <ul>
+                <!-- Frågor om hur olika händelser och användarinteraktioner hanteras -->
+                <li><strong>handleKeyDown(e):</strong><br> Hur hanterar jag när spelaren trycker på en tangent?</li>
+                <li><strong>handleKeyUp(e):</strong><br> Hur hanterar jag när spelaren släpper en tangent?</li>
+                <li><strong>setupEventListeners(canvas):</strong><br> Hur ställer jag in så att spelet kan fånga spelarens tangenter?</li>
+                <li><strong>showInfoModal():</strong><br> Hur visar jag ett informationsfönster på skärmen?</li>
+                <li><strong>closeInfoModal():</strong><br> Hur stänger jag informationsfönstret?</li>
+                <li><strong>returnToMenu():</strong><br> Hur går jag tillbaka till huvudmenyn från spelet?</li>
+                <li><strong>showGameOverScreen(won):</strong><br> Hur visar jag om spelaren har vunnit eller förlorat när spelet är slut?</li>
+            </ul>
+
+            <h2>Kollision och Spellogik:</h2>
+            <ul>
+                <!-- Frågor om hur kollisioner och spel-logik hanteras -->
+                <li><strong>collisionDetection(ctx):</strong><br> Hur ser jag när bollen träffar något i spelet?</li>
+                <li><strong>startCountdown(callback):</strong><br> Hur startar jag en nedräkning, och vad gör jag när den är klar?</li>
+            </ul>
+
+            <p>
+                Att ställa frågor om varje del av koden hjälper dig att förstå den bättre och gör det lättare att skapa något eget.
+                När du läser igenom och arbetar med din kod, tänk på vilka frågor som dyker upp för dig, och skriv ner dem. Det kommer att guida dig genom utvecklingsprocessen och hjälpa dig att lösa problem effektivt.
+            </p>
+            <hr>
+            <h3>Steg 1: Skapa HTML-strukturen</h3>
+            <p>Här är de steg du behöver för att skapa grundstrukturen för ditt HTML-dokument:</p>
+            <ul>
+                <li><strong>1.1 Grundstruktur:</strong> Börja med att skapa ett HTML-dokument med en <code>&lt;head&gt;</code> och en <code>&lt;body&gt;</code>.
+                     Lägg till en titel och länka till din CSS-fil i <code>&lt;head&gt;</code>.</li>
+                <li><strong>1.2 Spelcontainer:</strong> Skapa en container för spelet i <code>&lt;body&gt;</code>, 
+                    till exempel en <code>&lt;div&gt;</code> med ett specifikt ID. Lägg till element för olika delar av spelet, som en titel, formulär för användarnamn, startknapp och spelskärm.</li>
+            </ul>
+            <hr>
+            <h3>Steg 2: Styla med CSS</h3>
+            <p>Så här stylar du spelet med CSS:</p>
+            <ul>
+                <li><strong>2.1 Grundläggande stilar:</strong> Sätt en bakgrundsfärg, typsnitt och marginaler för hela sidan. Gör spelets titel tydlig genom att ändra storlek och färg.</li>
+                <li><strong>2.2 Spelspecifika stilar:</strong> Styla länkar, formulär och knappar för att göra dem användarvänliga. Se till att spelskärmen och canvasbehållaren har rätt dimensioner och placering.</li>
+                <li><strong>2.3 Anpassa stilar:</strong> Lek med olika färger, typsnitt och layout för att ge spelet en personlig touch. Lägg till övergångar och animationer för att göra spelet mer levande.</li>
+            </ul>
+            <hr>
+            <h3>Steg 3: Lägg till funktionalitet med JavaScript</h3>
+            <p>Följande steg hjälper dig att lägga till funktionalitet till spelet med JavaScript:</p>
+            <ul>
+                <li><strong>3.1 Initialisering:</strong> När sidan har laddats (<code>DOMContentLoaded</code>), starta spelet och dess element. Skapa funktioner för att starta spelet, återställa bollen och paddeln, och hantera spelets logik.</li>
+                <li><strong>3.2 Händelsehanterare:</strong> Lägg till funktioner som lyssnar på tangenttryckningar för att kontrollera paddeln. Skapa funktioner för att visa och dölja modaler, starta nedräkningar och visa spelets slutskärm.</li>
+                <li><strong>3.3 Spelets logik:</strong> Använd canvas för att rita bollen, paddeln och brickorna. Implementera kollisionsdetektion och poängräkning.</li>
+            </ul>
+            <hr>
+            <h3>Anpassa spelet</h3>
+            <p>Så här kan du anpassa spelet för att göra det till ditt eget:</p>
+            <ul>
+                <li><strong>Ändra designen:</strong> Anpassa färger, typsnitt och layout i CSS för att passa din stil. Lägg till egna bilder eller grafik för en mer unik spelupplevelse.</li>
+                <li><strong>Lägg till funktioner:</strong> Utöka JavaScript-koden för att lägga till fler nivåer, olika typer av brickor eller andra spelmekanismer. Skapa nya funktioner som gör spelet mer intressant och utmanande.</li>
+                <li><strong>Optimera användarupplevelsen:</strong> Testa spelet noggrant för att hitta och fixa buggar. Få feedback från andra spelare och använd den för att förbättra spelet.</li>
+            </ul>
+
+            <p>
+                Genom att följa dessa steg kan du skapa ditt eget Brick Breaker-spel och anpassa det efter dina önskemål. Den kompletta koden finns tillgänglig via länkarna ovan, så du kan se hur spelet är uppbyggt och fungerar.
+            </p>
+            <br>
+            <p>Lycka till!</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Mitt Projekt. Alla rättigheter förbehållna.</p>
+    </footer>
+    
+    <script src="script.js"></script> <!-- Länkar till JavaScript-filen för funktionalitet -->
+</body>
+</html>
