@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <!-- Grundläggande metadata och länk till CSS-stilblad -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentation av Teknik - Mitt Projekt</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Huvudhuvud (header) med sidans titel och navigeringsmeny -->
+    <header>
+        <h1>Presentation av Teknik</h1>
+        <hr>
+        <nav>
+            <!-- Navigeringsmeny med länkar till olika sidor -->
+            <ul>
+                <li><a href="index.html">Startsida</a></li><br>
+                <li><a href="presentation.html">Presentation</a></li>
+                <li><a href="redovisning.html">Redovisning</a></li>
+                <li><a href="steg-for-steg.html">Steg-för-Steg</a></li>
+                <li><a href="kallredovisning.html">Källhänvisning</a></li>
+                <hr>
+            </ul>
+            <ul>
+                <!-- Länk till Brick Breaker Game-projektet -->
+                <li><a href="../project/index.html">Brick Breaker Game</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Huvudinnehåll (main) med teknisk översikt och detaljer om projektet -->
+    <main>
+        <!-- Sektion med en teknisk översikt över projektet -->
+        <section class="intro">
+            <h2>Teknisk Översikt</h2>
+            <p>I detta projekt har jag använt följande tekniker:</p>
+            <ul>
+                <li><b>HTML5 Canvas:</b> Canvas används för att rita och ändra 2D-grafik. 
+                    Jag har använt Canvas för att skapa spelets visuella delar, som bollen, paddeln och brickorna. 
+                    Canvas API låter mig uppdatera och animera dessa delar för att göra spelet interaktivt.</li>
+                
+                <li><b>CSS:</b> Min CSS är designad för att vara responsiv och användarvänlig på olika enheter. 
+                    Jag använder Flexbox för att centrera innehållet både horisontellt och vertikalt, 
+                    vilket gör att layouten anpassar sig till skärmstorlek. Bakgrundsgradienter och transparenta element skapar en modern design. 
+                    Knappar och text har anpassade storlekar och marginaler för bättre användarupplevelse, 
+                    och modala fönster är implementerade för att hantera olika interaktioner smidigt. 
+                    Allt detta säkerställer att webbplatsen ser bra ut och fungerar väl på både stora skärmar och mobila enheter.</li>
+                
+                <li><b>JavaScript:</b> JavaScript är språket som styr spelets logik och interaktivitet. 
+                    Jag har använt JavaScript för att hantera användarens tangenttryckningar, kollisionsdetektion och spelets flöde. 
+                    JavaScript gör att spelet reagerar på användarens input och uppdaterar spelets tillstånd i realtid.</li>
+                
+                <li><b>Tutorial och Extern Kodbas:</b> Projektet började med inspiration från en tutorial och en befintlig kodbas.
+                    Genom att studera dessa resurser kunde jag ställa frågor och hitta lösningar på specifika problem, 
+                    vilket hjälpte mig att bygga mitt spel.</li>
+            </ul>
+            <p>Genom att kombinera dessa tekniker har jag skapat ett spel som är både interaktivt och visuellt tilltalande. 
+                Detta projekt har också gett mig en bättre förståelse för hur dessa verktyg kan användas tillsammans för att skapa dynamiska webbapplikationer.</p>
+        </section>
+        
+        <hr>
+
+        <!-- Sektion med information om hur HTML5 Canvas används i projektet -->
+        <section class="canvas">
+            <h2>Canvas</h2>
+            <p>
+                I detta projekt har jag använt HTML5 Canvas för att skapa och hantera 2D-grafik på webbplatsen. 
+                Canvas är en kraftfull teknik som gör det möjligt att rita och animera grafik direkt i webbläsaren. 
+                Jag har använt Canvas för att utveckla spelet och skapa interaktiva element.<br>
+                
+                Med Canvas kan man rita former, bilder och text, samt skapa animationer och spel.
+                I mitt projekt använder jag Canvas för att rita spelplanen, bollen, paddeln och tegelstenarna. 
+                Genom att kombinera olika Canvas-funktioner kan jag skapa ett dynamiskt och interaktivt spel.<br>
+                
+                Detta är första gången jag arbetar med Canvas, och det har varit en lärorik upplevelse.
+                Jag har lärt mig mycket om hur man använder Canvas för att skapa grafik och hur man programmerar spel och animationer. 
+                Det har varit spännande att se hur man kan skapa interaktiva element med bara några rader kod:</p>
+            <ul>
+                <li><strong>Bollen:</strong> Ritas som en cirkel som rör sig enligt spelets regler.</li>
+                <li><strong>Paddeln:</strong> Ritas som en rektangel som användaren styr med tangenterna.</li>
+                <li><strong>Brickorna:</strong> Ritas som rektanglar som bryts när bollen träffar dem.</li>
+                <li><strong>Stjärnorna:</strong> Ritas på en annan Canvas för att skapa en rörlig bakgrund.</li>
+            </ul>
+            <p>Med Canvas API kan jag enkelt rita, uppdatera och animera dessa objekt, vilket gör spelet mer dynamiskt och interaktivt.</p>
+        </section>
+
+        <hr>
+
+        <!-- Sektion som beskriver användningen av Agile-metoden i projektet -->
+        <section class="agile-method">
+            <h2>Agile-metoden</h2>
+            <p>
+                För att utveckla projektet effektivt använde jag Agile-metoden. 
+                Den gör att jag kan arbeta med olika delar av koden steg för steg och snabbt anpassa mig efter förändringar och feedback. 
+                Genom att jobba i korta omgångar och ständigt testa och förbättra koden kunde jag skapa och förbättra spelet på ett effektivt sätt.</p>
+        </section>
+
+        <hr>
+
+        <!-- Sektion med resurser och verktyg som användes för projektet -->
+        <section class="resources">
+            <h2>Resurser och Verktyg</h2>
+            <p>
+                Projektet började med att jag fick inspiration från en tutorial och en befintlig kodbas. 
+                När jag gick igenom dessa källor ställde jag mig frågor om hur olika delar fungerade och hur jag kunde implementera liknande funktioner i mitt eget spel. 
+                Genom att undersöka dessa frågor och använda olika resurser, byggde jag upp mitt spel från grunden och fick en djupare förståelse för de tekniker som används.</p>
+            <ul>
+                <li><a href="https://www.geeksforgeeks.org/create-a-2d-brick-breaker-game-using-html-css-and-javascript/">Resurs 1 (GeeksForGeeks)</a></li>
+                <li><a href="https://www.youtube.com/watch?v=DKCUeJdFkFc">Resurs 2 (YouTube)</a></li>
+                <li><a href="https://openai.com/chatgpt/">Resurs 3 (ChatGPT)</a></li>
+            </ul>
+        </section>
+        
+        <!-- Sektion som beskriver användningen av ChatGPT i projektet -->
+        <h2>Användning av ChatGPT som Verktyg</h2>
+        <p>I det här projektet har jag använt ChatGPT för att få hjälp med vissa utmaningar och för att få feedback på mina idéer och lösningar. 
+            ChatGPT har varit till nytta för att förklara svåra koncept, 
+            ge förslag på hur jag kan strukturera koden och ge tips om hur jag kan förbättra delar av spelet.</p>
+        <p>Jag har dock använt dessa tips som en del av min egen arbetsprocess. 
+            Jag har anpassat och implementerat förslagen så att de passar just mitt projekt.</p>
+        <p>Det är viktigt att förstå att <u>ChatGPT har fungerat som en rådgivare</u> och inte som den huvudsakliga skaparen av projektet. 
+            Jag har själv utvecklat de flesta av lösningarna och gjort egna beslut om hur jag ska använda verktyget. 
+            Jag ser det som ett stöd som hjälper mig i den kreativa processen, snarare än som en ersättning för min egen insats.</p>
+
+    </main>
+
+    <!-- Sidfot (footer) med copyright-information -->
+    <footer>
+        <p>&copy; 2024 Mitt Projekt. Alla rättigheter förbehållna.</p>
+    </footer>
+</body>
+</html>
