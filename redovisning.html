@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redovisning - Projekt</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Redovisning av Koden</h1><hr>
+        <nav>
+            <ul>
+                <li><a href="index.html">Startsida</a></li><br>
+                <li><a href="presentation.html">Presentation</a></li>
+                <li><a href="redovisning.html">Redovisning</a></li>
+                <li><a href="steg-for-steg.html">Steg-för-Steg</a></li>
+                <li><a href="kallredovisning.html">Källhänvisning</a></li><hr>       
+            </ul>
+            <ul>
+                <li><a href="../project/index.html">Brick Breaker Game</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+
+        <div>
+            <h2>Redovisning</h2>
+            <button class="accordion">JavaScript</button>
+            <div class="panel">
+                <section>
+                    <button class="accordion">1. Initialisering och Konfiguration</button>
+                    <div class="panel">
+                        <button class="accordion">1.1 DOMContentLoaded (event handler)</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Startar funktioner när sidan är färdigladdad.</p>
+                            <p><b>Varför:</b> För att säkerställa att alla element på sidan är redo innan vi börjar.</p>
+                            <p><b>Hur:</b> Kopplar knappar och funktioner till deras respektive händelser.</p>
+                            <p><b>Tips:</b> Använd detta för att starta funktioner som kräver att sidan är laddad.</p>
+        
+                            <pre><code class="language-javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('start-btn').addEventListener('click', startGame);
+            document.getElementById('return-btn').addEventListener('click', returnToMenu);
+            document.addEventListener('keydown', handleKeyDown);
+            document.addEventListener('keyup', handleKeyUp);
+            document.getElementById('infoButton').addEventListener('click', showInfoModal);
+            document.getElementById('infoClose').addEventListener('click', closeInfoModal);
+            window.addEventListener('click', function(event) {
+                if (event.target === document.getElementById('infoModal')) {
+                    closeInfoModal();
+                }
+            });
+        });
+                            </code></pre>
+                        </div>
+        
+                        <button class="accordion">1.2 startGame()</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Startar spelet och gömmer formuläret där användaren skriver sitt namn.</p>
+                            <p><b>Varför:</b> För att börja spelet och få fram rätt spelskärm.</p>
+                            <p><b>Hur:</b> Hämtar användarnamnet, gömmer formuläret och visar spelet.</p>
+                            <p><b>Tips:</b> Använd ett standardnamn om inget namn skrivs in.</p>
+                            <pre><code class="language-javascript">
+        function startGame() {
+            gameState.username = document.getElementById('username-input').value.trim();
+            if (gameState.username === '') {
+                gameState.username = 'Anonymous';
+            }
+        
+            document.getElementById('username-form').style.display = 'none';
+            document.getElementById('game-screen').style.display = 'block';
+        
+            initializeGame();
+        }
+                            </code></pre>
+                        </div>
+        
+                        <button class="accordion">1.3 initializeGame()</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Förbereder spelet genom att ställa in nödvändiga element och lyssnare.</p>
+                            <p><b>Varför:</b> För att sätta upp spelet och starta animationerna.</p>
+                            <p><b>Hur:</b> Hämtar referenser till canvas, ritar upp startskärmen och ställer in händelselyssnare.</p>
+                            <p><b>Tips:</b> Kontrollera att alla element finns innan de används.</p>
+        
+                            <pre><code class="language-javascript">
+        function initializeGame() {
+            const canvas = document.getElementById('gameCanvas');
+            if (!canvas) {
+                console.error("Canvas element 'gameCanvas' not found.");
+                return;
+            }
+            const ctx = canvas.getContext('2d');
+        
+            const starCanvas = document.getElementById('starCanvas');
+            if (!starCanvas) {
+                console.error("Canvas element 'starCanvas' not found.");
+                return;
+            }
+            const starCtx = starCanvas.getContext('2d');
+        
+            resetBallAndPaddle(canvas);
+            initializeBricks();
+            drawInitialScreen(ctx);
+            drawStars(starCtx);
+            setupEventListeners(canvas);
+        }
+                            </code></pre>
+                        </div>
+        
+                        <button class="accordion">1.4 resetBallAndPaddle(canvas)</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Nollställer bollen och paddeln till sina ursprungslägen.</p>
+                            <p><b>Varför:</b> För att starta om spelet efter en poäng eller en omstart.</p>
+                            <p><b>Hur:</b> Sätter bollens position i mitten av skärmen och paddeln till sina startpositioner.</p>
+                            <p><b>Tips:</b> Använd denna funktion för att återställa spelet snabbt.</p>
+        
+                            <pre><code class="language-javascript">
+        function resetBallAndPaddle(canvas) {
+            gameState.paddle.x = (canvas.width - gameState.paddle.width) / 2;
+            gameState.ball.x = gameState.paddle.x + gameState.paddle.width / 2;
+            gameState.ball.y = canvas.height - gameState.paddle.height - gameState.ball.radius;
+            randomizeBallDirection();
+            applySpeedToBall(config.ballSpeed);
+        }
+                            </code></pre>
+                        </div>
+        
+                        <button class="accordion">1.5 randomizeBallDirection()</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Slumpar bollens riktning vid spelets start.</p>
+                            <p><b>Varför:</b> För att skapa variation och oförutsägbarhet i spelet.</p>
+                            <p><b>Hur:</b> Ställer in bollens hastighetsvektorer till slumpmässiga värden inom ett intervall.</p>
+                            <p><b>Tips:</b> Håll riktningen inom rimliga gränser för att undvika för snabba eller för långsamma bollar.</p>
+        
+                            <pre><code class="language-javascript">
+        function randomizeBallDirection() {
+            const minAngleDegrees = 30;
+            const maxAngleDegrees = 60;
+            const minAngleRadians = minAngleDegrees * (Math.PI / 180);
+            const maxAngleRadians = maxAngleDegrees * (Math.PI / 180);
+            const angle = Math.random() * (maxAngleRadians - minAngleRadians) + minAngleRadians;
+            gameState.ball.dx = Math.cos(angle);
+            gameState.ball.dy = -Math.sin(angle);
+            applySpeedToBall(config.ballSpeed);
+            console.log(`Ball direction set to dx: ${gameState.ball.dx}, dy: ${gameState.ball.dy}`);
+        }
+                            </code></pre>
+                        </div>
+        
+                        <button class="accordion">1.6 applySpeedToBall(speed)</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Tillämpa en hastighet på bollen.</p>
+                            <p><b>Varför:</b> För att sätta bollens fart i spelet.</p>
+                            <p><b>Hur:</b> Ändrar bollens hastighetsvektorer baserat på det givna hastighetsvärdet.</p>
+                            <p><b>Tips:</b> Justera hastigheten beroende på spelets svårighetsgrad.</p>
+        
+                            <pre><code class="language-javascript">
+        function applySpeedToBall(speed) {
+            const length = Math.sqrt(gameState.ball.dx * gameState.ball.dx + gameState.ball.dy * gameState.ball.dy);
+            gameState.ball.dx = (gameState.ball.dx / length) * speed;
+            gameState.ball.dy = (gameState.ball.dy / length) * speed;
+        }
+                            </code></pre>
+                        </div>
+        
+                        <button class="accordion">1.7 initializeBricks()</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Skapar en uppsättning av tegelstenar på spelplanen.</p>
+                            <p><b>Varför:</b> För att ge spelaren ett mål att sikta på och förstöra.</p>
+                            <p><b>Hur:</b> Loopar genom rader och kolumner och placerar ut tegelstenar.</p>
+                            <p><b>Tips:</b> Justera antalet rader och kolumner för att ändra svårighetsgraden.</p>
+        
+                            <pre><code class="language-javascript">
+        function initializeBricks() {
+            const { rowCount, columnCount } = config.brick;
+            gameState.bricks = [];
+            for (let c = 0; c < columnCount; c++) {
+                gameState.bricks[c] = [];
+                for (let r = 0; r < rowCount; r++) {
+                    gameState.bricks[c][r] = { x: 0, y: 0, status: 1 };
+                }
+            }
+        }
+                            </code></pre>
+                        </div>
+        
+                        <button class="accordion">1.8 drawInitialScreen(ctx)</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Ritar upp startskärmen när spelet börjar.</p>
+                            <p><b>Varför:</b> För att ge spelaren en visuell indikation på att spelet är redo.</p>
+                            <p><b>Hur:</b> Använder canvas för att rita text och andra grafiska element.</p>
+                            <p><b>Tips:</b> Håll designen enkel och tydlig för att spelaren snabbt ska förstå.</p>
+        
+                            <pre><code class="language-javascript">
+        function drawInitialScreen(ctx) {
+            drawBricks(ctx);
+            drawBall(ctx);
+            drawPaddle(ctx);
+            drawUsername(ctx);
+            drawScore(ctx);
+            drawLives(ctx);
+        }
+                            </code></pre>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <button class="accordion">2. Datahantering</button>
+                    <div class="panel">
+                        <button class="accordion">2.1 config (variabel)</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Håller spelets inställningar och konfigurationsdata.</p>
+                            <p><b>Varför:</b> För att centralt hantera alla viktiga konfigurationsvärden.</p>
+                            <p><b>Hur:</b> Innehåller inställningar som bollhastighet, antal liv och andra viktiga parametrar.</p>
+                            <p><b>Tips:</b> Uppdatera denna variabel när du behöver ändra spelets inställningar.</p>
+        
+                            <pre><code class="language-javascript"></code>
+        const config = {
+            ballSpeed: 8, 
+            paddleSpeed: 7,
+            brick: {
+                rowCount: 6, 
+                columnCount: 9, 
+                width: 75, 
+                height: 20, 
+                padding: 10, 
+                offsetTop: 60, 
+                offsetLeft: 20 
+            },
+            star: {
+                count: 100, 
+                maxRadius: 3, 
+                maxSpeed: 3 
+            }
+        };                       
+                            </code></pre>
+        
+                        </div>
+                        
+                        <button class="accordion">2.2 gameState (variabel)</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Håller spelets nuvarande tillstånd och status.</p>
+                            <p><b>Varför:</b> För att spåra var i spelet vi befinner oss och vad som händer.</p>
+                            <p><b>Hur:</b> Innehåller data som poäng, antal liv och om spelet är pausat eller inte.</p>
+                            <p><b>Tips:</b> Använd denna variabel för att kontrollera spelets flöde och logik.</p>
+        
+                            <pre><code class="language-javascript"></code>
+        let gameState = {
+            username: '', 
+            ball: {
+                x: 0, 
+                y: 0, 
+                dx: 0, 
+                dy: 0, 
+                radius: 10 
+            },
+            paddle: {
+                height: 10, 
+                width: 100, 
+                x: 0 
+            },
+            bricks: [],
+            score: 0, 
+            lives: 3, 
+            gameOver: false, 
+            rightPressed: false, 
+            leftPressed: false 
+        };
+                            </code></pre>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <button class="accordion">3. Ritning och Grafik</button>
+                    <div class="panel">
+                        <button class="accordion">3.1 drawBall(ctx)</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Ritar bollen på canvasen.</p>
+                            <p><b>Varför:</b> För att visuellt representera bollen i spelet.</p>
+                            <p><b>Hur:</b> Använder canvas API för att rita en cirkel vid bollens position.</p>
+                            <p><b>Tips:</b> Uppdatera bollens position innan du ritar för att få den att röra sig.</p>
+        
+                            <pre><code class="language-javascript">
+        function drawBall(ctx) {
+            ctx.beginPath();
+            ctx.arc(gameState.ball.x, gameState.ball.y, gameState.ball.radius, 0, Math.PI * 2);
+            ctx.fillStyle = '#0095DD';
+            ctx.fill();
+            ctx.closePath();
+        }
+                            </code></pre>
+                        </div>
+        
+                        <button class="accordion">3.2 drawPaddle(ctx)</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Ritar spelarens paddel på canvasen.</p>
+                            <p><b>Varför:</b> För att visa paddeln som spelaren kontrollerar.</p>
+                            <p><b>Hur:</b> Använder canvas API för att rita en rektangel vid paddelns position.</p>
+                            <p><b>Tips:</b> Se till att paddeln är synlig och inom spelplanens gränser.</p>
+        
+                            <pre><code class="language-javascript">
+function drawPaddle(ctx) {
+    const { x, width, height } = gameState.paddle;
+    const canvas = ctx.canvas;
+
+    ctx.clearRect(0, canvas.height - height, canvas.width, height); 
+
+    const paddleSectionWidth = width / 3; 
+
+    ctx.beginPath();
+    
+    ctx.rect(x, canvas.height - height, paddleSectionWidth, height);
+    ctx.fillStyle = '#ff0000'; 
+    ctx.fill();
+    ctx.closePath();
+
+    ctx.beginPath();
+    
+    ctx.rect(x + paddleSectionWidth, canvas.height - height, paddleSectionWidth, height);
+    ctx.fillStyle = '#00ff00'; 
+    ctx.fill();
+    ctx.closePath();
+
+    ctx.beginPath();
+    
+    ctx.rect(x + 2 * paddleSectionWidth, 
+    canvas.height - height, paddleSectionWidth, height);
+    ctx.fillStyle = '#ff0000'; 
+    ctx.fill();
+    ctx.closePath();
+}
+                            </code></pre>
+                        </div>
+        
+                        <button class="accordion">3.3 drawBricks(ctx)</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Ritar alla tegelstenar på canvasen.</p>
+                            <p><b>Varför:</b> För att visa de mål som spelaren ska träffa och förstöra.</p>
+                            <p><b>Hur:</b> Loopar genom alla tegelstenar och ritar dem på sina respektive positioner.</p>
+                            <p><b>Tips:</b> Använd olika färger för att indikera olika styrkor eller poängvärden.</p>
+        
+        function drawBricks(ctx) {
+            gameState.bricks.forEach(column => {
+                column.forEach(brick => {
+                    if (brick.status === 1) {
+                        ctx.beginPath();
+                        ctx.rect(brick.x, brick.y, config.brick.width, config.brick.height);
+                        ctx.fillStyle = '#0095DD';
+                        ctx.fill();
+                        ctx.closePath();
+                    }
+                });
+            });
+        }
+                            </code></pre>
+                        </div>
+        
+                        <button class="accordion">3.4 drawUsername(ctx)</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Visar spelarens användarnamn på skärmen.</p>
+                            <p><b>Varför:</b> För att personifiera spelet och visa vem som spelar.</p>
+                            <p><b>Hur:</b> Använder canvas API för att rita text med spelarens namn.</p>
+                            <p><b>Tips:</b> Placera namnet på en synlig och tydlig plats på skärmen.</p>
+        
+                            <pre><code class="language-javascript">
+        function drawUsername(ctx) {
+            ctx.font = '16px Arial';
+            ctx.fillStyle = '#0095DD';
+            ctx.fillText('Username: ' + gameState.username, 10, 20);
+        }
+                            </code></pre>
+                        </div>
+        
+                        <button class="accordion">3.5 drawScore(ctx)</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Visar spelarens poäng på skärmen.</p>
+                            <p><b>Varför:</b> För att ge spelaren feedback om deras framsteg och prestation.</p>
+                            <p><b>Hur:</b> Använder canvas API för att rita text med spelarens poäng.</p>
+                            <p><b>Tips:</b> Uppdatera poängen kontinuerligt för att hålla informationen aktuell.</p>
+        
+        function drawScore(ctx) {
+            ctx.font = '16px Arial';
+            ctx.fillStyle = '#0095DD';
+            ctx.fillText('Score: ' + gameState.score, canvas.width - 100, 20);
+        }
+                            </code></pre>
+                        </div>
+        
+                        <button class="accordion">3.6 drawLives(ctx)</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Visar antalet liv spelaren har kvar.</p>
+                            <p><b>Varför:</b> För att informera spelaren om hur många försök de har kvar.</p>
+                            <p><b>Hur:</b> Använder canvas API för att rita symboler eller text som representerar liv.</p>
+                            <p><b>Tips:</b> Använd tydliga och enkla symboler för att visa antalet liv.</p>
+        
+                            <pre><code class="language-javascript">
+        function drawLives(ctx) {
+            ctx.font = '16px Arial';
+            ctx.fillStyle = '#0095DD';
+            ctx.fillText('Lives: ' + gameState.lives, 10, canvas.height - 20);
+        }
+                            </code></pre>
+                        </div>
+        
+                        <button class="accordion">3.7 drawStars(starCtx)</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Ritar bakgrundsstjärnor på canvasen.</p>
+                            <p><b>Varför:</b> För att skapa en visuellt tilltalande och dynamisk bakgrund.</p>
+                            <p><b>Hur:</b> Använder canvas API för att rita små punkter eller cirklar som representerar stjärnor.</p>
+                            <p><b>Tips:</b> Lägg till lite rörelse eller variation i stjärnorna för en mer levande bakgrund.</p>
+        
+                            <pre><code class="language-javascript">
+        function drawStars(starCtx) {
+            // Placeholder function for drawing stars on the canvas
+            // You can implement star drawing logic here
+        }
+                            </code></pre>
+                        </div>
+        
+                        <button class="accordion">3.8 draw(ctx)</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Hanterar alla ritningar som behövs för att uppdatera spelets skärm.</p>
+                            <p><b>Varför:</b> För att visuellt representera spelets tillstånd och händelser.</p>
+                            <p><b>Hur:</b> Kallar på andra ritfunktioner som drawBall, drawPaddle och drawBricks för att uppdatera skärmen.</p>
+                            <p><b>Tips:</b> Optimera ritfunktionerna för att hålla spelets prestanda hög.</p>
+        
+                            <pre><code class="language-javascript">
+        function draw(ctx) {
+            drawBall(ctx);
+            drawPaddle(ctx);
+            drawBricks(ctx);
+            drawUsername(ctx);
+            drawScore(ctx);
+            drawLives(ctx);
+        }
+                            </code></pre>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <button class="accordion">4. Event Listeners och Hantering</button>
+                    <div class="panel">
+                        <button class="accordion">4.1 handleKeyDown(e)</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Hanterar tangenttryckningar när en tangent trycks ned.</p>
+                            <p><b>Varför:</b> För att reagera på spelarens input och styra spelet.</p>
+                            <p><b>Hur:</b> Uppdaterar spelets tillstånd baserat på vilken tangent som trycks ned.</p>
+                            <p><b>Tips:</b> Hantera bara de tangenter som behövs för att undvika onödig kod.</p>
+                            
+                            <pre><code class="language-javascript">
+                function handleKeyDown(e) {
+                    if (e.key === 'Right' || e.key === 'ArrowRight') {
+                        gameState.paddle.rightPressed = true;
+                    } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
+                        gameState.paddle.leftPressed = true;
+                    }
+                }
+                            </code></pre>
+                        </div>
+                
+                        <button class="accordion">4.2 handleKeyUp(e)</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Hanterar tangenttryckningar när en tangent släpps upp.</p>
+                            <p><b>Varför:</b> För att stoppa åtgärder som startades när en tangent trycktes ned.</p>
+                            <p><b>Hur:</b> Återställer tillstånd som ändrats av handleKeyDown-funktionen.</p>
+                            <p><b>Tips:</b> Se till att matcha varje handleKeyDown med ett motsvarande handleKeyUp för smidig kontroll.</p>
+        
+                            <pre><code class="language-javascript">
+                function handleKeyUp(e) {
+                    if (e.key === 'Right' || e.key === 'ArrowRight') {
+                        gameState.paddle.rightPressed = false;
+                    } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
+                        gameState.paddle.leftPressed = false;
+                    }
+                }
+                            </code></pre>
+                        </div>
+                
+                        <button class="accordion">4.3 setupEventListeners(canvas)</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Sätter upp alla nödvändiga händelselyssnare för spelet.</p>
+                            <p><b>Varför:</b> För att fånga och hantera användarens interaktioner med spelet.</p>
+                            <p><b>Hur:</b> Lägg till lyssnare för musrörelser, tangenttryckningar och andra händelser.</p>
+                            <p><b>Tips:</b> Håll alla händelselyssnare organiserade och lätt att underhålla.</p>
+        
+                            <pre><code class="language-javascript">
+                function setupEventListeners(canvas) {
+                    canvas.addEventListener('mousemove', function(e) {
+                        const mouseX = e.clientX - canvas.getBoundingClientRect().left;
+                        gameState.paddle.x = mouseX - gameState.paddle.width / 2;
+                    });
+                    document.addEventListener('keydown', handleKeyDown);
+                    document.addEventListener('keyup', handleKeyUp);
+                }
+                            </code></pre>
+                        </div>
+                
+                        <button class="accordion">4.4 showInfoModal()</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Visar en informationsmodul på skärmen.</p>
+                            <p><b>Varför:</b> För att ge spelaren viktig information eller instruktioner.</p>
+                            <p><b>Hur:</b> Ändrar modulens synlighet och innehåll för att visa informationen.</p>
+                            <p><b>Tips:</b> Använd tydlig och koncis text för att kommunicera med spelaren.</p>
+        
+                            <pre><code class="language-javascript">
+                function showInfoModal() {
+                    document.getElementById('infoModal').style.display = 'block';
+                }
+                            </code></pre>
+                        </div>
+                
+                        <button class="accordion">4.5 closeInfoModal()</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Stänger informationsmodulen.</p>
+                            <p><b>Varför:</b> För att återgå till spelet eller huvudmenyn.</p>
+                            <p><b>Hur:</b> Ändrar modulens synlighet för att dölja den.</p>
+                            <p><b>Tips:</b> Ge spelaren en tydlig knapp eller mekanism för att stänga modulen.</p>
+        
+                            <pre><code class="language-javascript">
+                function closeInfoModal() {
+                    document.getElementById('infoModal').style.display = 'none';
+                }
+                            </code></pre>
+                        </div>
+                
+                        <button class="accordion">4.6 returnToMenu()</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Återvänder till spelets huvudmeny.</p>
+                            <p><b>Varför:</b> För att låta spelaren starta om eller välja andra alternativ.</p>
+                            <p><b>Hur:</b> Laddar huvudmenyn och återställer spelets tillstånd.</p>
+                            <p><b>Tips:</b> Se till att alla viktiga data sparas innan du återgår till menyn.</p>
+        
+                            <pre><code class="language-javascript">
+                function returnToMenu() {
+                    document.getElementById('game-screen').style.display = 'none';
+                    document.getElementById('username-form').style.display = 'block';
+                    // Optionellt: Återställ spelets tillstånd här
+                }
+                            </code></pre>
+                        </div>
+                
+                        <button class="accordion">4.7 showGameOverScreen(won)</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Visar en skärm för när spelet är över.</p>
+                            <p><b>Varför:</b> För att informera spelaren om de vann eller förlorade och ge dem alternativ att spela igen.</p>
+                            <p><b>Hur:</b> Ändrar skärmens innehåll och synlighet beroende på om spelaren vann eller förlorade.</p>
+                            <p><b>Tips:</b> Ge spelaren alternativ att starta om spelet eller återgå till huvudmenyn.</p>
+        
+                            <pre><code class="language-javascript">
+                function showGameOverScreen(won) {
+                    const gameOverScreen = document.getElementById('game-over-screen');
+                    gameOverScreen.style.display = 'block';
+                    const message = won ? 'Grattis, du har vunnit!' : 'Spelet är över. Förlorade.';
+                    gameOverScreen.querySelector('p').textContent = message;
+                }
+                            </code></pre>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <button class="accordion">5. Kollision och Spellogik</button>
+                    <div class="panel">
+                        <button class="accordion">5.1 collisionDetection(ctx)</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Kontrollerar om bollen kolliderar med paddeln, väggarna eller tegelstenarna.</p>
+                            <p><b>Varför:</b> För att hantera spelets logik när kollisioner inträffar.</p>
+                            <p><b>Hur:</b> Jämför bollens position med andra objekt och ändrar bollens riktning vid kollision.</p>
+                            <p><b>Tips:</b> Lägg till ljud- eller visuella effekter vid kollisioner för en bättre upplevelse.</p>
+        
+                            <pre><code class="language-javascript">
+                function collisionDetection(ctx) {
+                    for (let c = 0; c < config.brick.columnCount; c++) {
+                        for (let r = 0; r < config.brick.rowCount; r++) {
+                            const brick = gameState.bricks[c][r];
+                            if (brick.status === 1) {
+                                if (gameState.ball.x > brick.x && gameState.ball.x < brick.x + config.brick.width &&
+                                    gameState.ball.y > brick.y && gameState.ball.y < brick.y + config.brick.height) {
+                                    
+                                    gameState.ball.dy = -gameState.ball.dy;
+                                    brick.status = 0; // brick is hit
+                                    gameState.score += 10;
+                
+                                    if (gameState.score === config.brick.rowCount * config.brick.columnCount * 10) {
+                                        showGameOverScreen(true);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                
+                    // Paddle collision
+                    if (gameState.ball.x > gameState.paddle.x && gameState.ball.x < gameState.paddle.x + gameState.paddle.width &&
+                        gameState.ball.y + gameState.ball.radius > canvas.height - gameState.paddle.height) {
+                        
+                        gameState.ball.dy = -gameState.ball.dy;
+                    }
+                
+                    // Wall collision
+                    if (gameState.ball.x + gameState.ball.dx > canvas.width - gameState.ball.radius || gameState.ball.x + gameState.ball.dx < gameState.ball.radius) {
+                        gameState.ball.dx = -gameState.ball.dx;
+                    }
+                
+                    if (gameState.ball.y + gameState.ball.dy < gameState.ball.radius) {
+                        gameState.ball.dy = -gameState.ball.dy;
+                    } else if (gameState.ball.y + gameState.ball.dy > canvas.height - gameState.ball.radius) {
+                        gameState.lives--;
+                        if (gameState.lives === 0) {
+                            showGameOverScreen(false);
+                        } else {
+                            resetBallAndPaddle(canvas);
+                        }
+                    }
+                }
+                            </code></pre>
+                        </div>
+                
+                        <button class="accordion">5.2 startCountdown(callback)</button>
+                        <div class="panel">
+                            <p><b>Det här gör:</b> Startar en nedräkning innan spelet börjar.</p>
+                            <p><b>Varför:</b> För att ge spelaren tid att förbereda sig innan spelet startar.</p>
+                            <p><b>Hur:</b> Visar en nedräkning på skärmen och anropar callback-funktionen när nedräkningen är klar.</p>
+                            <p><b>Tips:</b> Gör nedräkningen tydlig och lätt att se för spelaren.</p>
+        
+                            <pre><code class="language-javascript">
+                function startCountdown(callback) {
+                    let countdown = 3;
+                    const countdownElement = document.getElementById('countdown');
+                    countdownElement.style.display = 'block';
+                    const interval = setInterval(() => {
+                        countdownElement.textContent = countdown;
+                        countdown--;
+                        if (countdown < 0) {
+                            clearInterval(interval);
+                            countdownElement.style.display = 'none';
+                            callback();
+                        }
+                    }, 1000);
+                }
+                            </code></pre>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <br>
+            <button class="accordion">HTML</button>
+            <div class="panel">
+                <h3>Sammanfattning av HTML-strukturen</h3>
+                <p><b>Det här gör:</b> Beskriver strukturen och elementen i HTML-koden för spelet "Brick Breaker".</p>
+                <p><b>Varför:</b> För att ge en tydlig och organiserad presentation av spelets olika delar och funktioner.</p>
+                <p><b>Hur:</b> HTML-dokumentet består av flera element som tillsammans skapar en fungerande webbsida för spelet:</p>
+                <ul>
+                    <li><b>DOCTYPE och html-taggar:</b> Deklarerar dokumenttypen som HTML5 och anger språket till engelska.</li>
+                    <li><b>head:</b> Innehåller metadata som teckenkodning, viewport-inställningar och länkar till CSS.</li>
+                    <li><b>body:</b> Innehåller allt synligt innehåll på sidan.</li>
+                    <li><b>header och nav:</b> Används för navigering och innehåller en länk tillbaka till huvudwebbsidan.</li>
+                    <li><b>div id="app":</b> Huvudcontainer för spelet, med undersektioner för användarnamnsformulär, spelskärm och canvas-element.</li>
+                    <li><b>canvas:</b> Två canvas-element används för att rita spelets bakgrund och spelinnehåll.</li>
+                    <li><b>div id="game-over-screen":</b> Visar spel över meddelande och poäng när spelet är slut.</li>
+                </ul>
+            </div>
+            <br>
+            <button class="accordion">CSS</button>
+            <div class="panel">
+                <h3>Sammanfattning av CSS-stilningen</h3>
+                <p><b>Det här gör:</b> Anger stilar och utseende för HTML-elementen i spelet "Brick Breaker".</p>
+                <p><b>Varför:</b> För att göra spelet visuellt tilltalande och användarvänligt.</p>
+                <p><b>Hur:</b> CSS-filen består av flera sektioner som stylar olika delar av spelet:</p>
+                <ul>
+                    <li><b>body:</b> Grundläggande styling som centrering av innehåll, bakgrundsgradient och textfärg.</li>
+                    <li><b>h2.game-title:</b> Stil för spelets titel med stor textstorlek.</li>
+                    <li><b>header och nav:</b> Styling för header och navigationslänk med bakgrundsfärg och övergångseffekter.</li>
+                    <li><b>#username-input och #start-btn:</b> Styling för användarnamnsinput och startknapp med textstorlek och bakgrundsfärg.</li>
+                    <li><b>#app:</b> Flexbox layout för att centrera innehåll.</li>
+                    <li><b>#game-screen:</b> Stil för spelskärmen med centrering, bakgrund och kantlinje.</li>
+                    <li><b>#canvas-container:</b> Relativ positionering och centrering för canvas-behållaren.</li>
+                    <li><b>#start-message, #game-over-screen:</b> Positionering och styling för start- och game over-meddelanden.</li>
+                    <li><b>.modal och .modal-content:</b> Styling för informationsmodulen med positionering, bakgrund och övergångseffekter.</li>
+                    <li><b>.button-container button:</b> Stil för knappar med bakgrundsfärg, marginaler och övergångseffekter.</li>
+                </ul>
+            </div>
+            <h2>Reflektion över Projektet</h2>
+            <p>
+                Det här projektet har varit det största och mest komplexa jag har arbetat med hittills, 
+                och jag vill gärna dela mina reflektioner över min arbetsprocess och de lärdomar jag har dragit.
+            </p> <hr>
+            <h2>Process och Utmaningar:</h2>
+            <p>
+                Att utveckla detta spel har varit en både intensiv och lärorik upplevelse.
+                 Jag har arbetat med en kodbas och följt en YouTube-tutorial som fungerade som inspiration och grund för projektet. 
+                 Trots denna vägledning har jag ofta behövt gå tillbaka till den ursprungliga koden och börja om med delar av projektet. 
+                 Detta har varit en utmaning eftersom jag hade svårt att fullt ut implementera mina egna idéer och anpassningar till den befintliga koden.
+            </p>
+            <p>
+                En stor del av svårigheterna har varit att integrera mina egna koncept med den kod som jag utgick ifrån.
+                 Det har varit en process av trial and error, 
+                 där jag har försökt och ofta misslyckats innan jag lyckades få saker att fungera som jag hade tänkt.
+                  Det har också varit överväldigande att hålla alla detaljer i huvudet samtidigt, 
+                  och jag har behövt vara flexibel och anpassa mina planer när jag stötte på problem.
+            </p>
+            <hr>
+            <h2>Lärdomar och Framsteg:</h2>
+            <p>
+                Trots dessa utmaningar har jag gjort betydande framsteg. 
+                Jag har lärt mig mycket om spelutveckling, kodstrukturering, och vikten av att dokumentera mina ändringar och idéer noggrant. 
+                Jag har blivit mer medveten om hur viktigt det är att ha en balans mellan att följa en guide och att vara kreativ och innovativ.
+            </p>
+            <p>
+                Jag har också lärt mig vikten av att vara tålmodig och att vara beredd på att gå tillbaka och omarbeta delar av projektet när det behövs. 
+                Även om jag ibland har känt mig frustrerad över att behöva börja om, 
+                har det gett mig värdefulla insikter i hur man hanterar komplexa projekt och löser problem på ett konstruktivt sätt.
+            </p>
+            <hr>
+            <h2>Framtida Utveckling:</h2>
+            <p>
+                Jag är medveten om att det finns brister och områden där spelet och koden kan förbättras. 
+                Jag ser fram emot att använda de erfarenheter och insikter jag har fått genom detta projekt i framtida utvecklingsarbete. 
+                Jag hoppas kunna utveckla mina färdigheter och kunskaper ytterligare så att jag kan hantera dessa utmaningar bättre och skapa ännu bättre lösningar framöver.<br><br>
+                Den erfarenhet jag har fått genom att arbeta med detta projekt är ovärderlig. 
+                Jag ser det som ett första steg i min utveckling och är entusiastisk över möjligheten att bygga vidare på den grund jag har lagt här. 
+                Jag uppskattar verkligen möjligheten att ha arbetat med ett projekt av denna omfattning och ser fram emot att tillämpa dessa erfarenheter för att skapa ännu bättre resultat framöver.
+            </p>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Mitt Projekt. Alla rättigheter förbehållna.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
