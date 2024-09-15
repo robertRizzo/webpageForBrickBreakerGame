@@ -20,7 +20,7 @@ steg-for-steg.html: Sida med steg-för-steg-guide för att utveckla spelet.
 
 style.css: CSS-fil för att styla hemsidan.
 
-# project/
+# project/ Länk (https://github.com/robertRizzo/brickBreakerGame)
 Denna mapp innehåller själva Brick Breaker-spelet och ska länkas från hemsidan. Innehållet i denna mapp inkluderar:
 
 index.html: HTML-strukturen för spelet.
