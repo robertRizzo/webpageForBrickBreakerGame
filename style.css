@@ -1,0 +1,113 @@
+/* Grundläggande stilinställningar */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: repeating-linear-gradient(135deg, #f5f5f5, #f5f5f5 20px, #e0e0e0 20px, #e0e0e0 40px);
+}
+
+/* Header stil */
+header {
+    background: linear-gradient(to right, #0f3460, #16213e, #1a1a2e);
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+
+header h1 {
+    margin: 0;
+    
+}
+#name{
+    font-family: cursive;
+    font-size: 40px;
+}
+/* Navigation stil */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Huvudsektion stil */
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+/* Footer stil */
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Drop-down (accordion) stilar */
+.accordion {
+    background-color: #e2e2e2;
+    color: #333;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 18px;
+    transition: 0.4s;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.accordion:hover {
+    background-color: #ccc;
+}
+
+.panel {
+    padding: 0 20px;
+    display: none;
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+
+.panel p {
+    margin: 0;
+    padding: 10px 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.step {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+#underline{
+    text-decoration: underline;
+}
