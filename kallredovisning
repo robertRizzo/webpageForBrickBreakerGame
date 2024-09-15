@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <!-- Grundläggande metadata och länk till CSS-stilblad -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startsida - Projekt</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Huvudhuvud (header) med projektets titel och navigeringsmeny -->
+    <header>
+        <h1>Brick Breaker Projekt av,<br> <span id="name">Robert Rizzo</span></h1>
+        <hr>
+        <nav>
+            <!-- Navigeringsmeny med länkar till olika sidor -->
+            <ul>
+                <li><a href="index.html">Startsida</a></li><br>
+                <li><a href="presentation.html">Presentation</a></li>
+                <li><a href="redovisning.html">Redovisning</a></li>
+                <li><a href="steg-for-steg.html">Steg-för-Steg</a></li>
+                <li><a href="kallredovisning.html">Källhänvisning</a></li>
+                <hr>          
+            </ul>
+            <ul>
+                <!-- Länk till Brick Breaker Game-projektet -->
+                <li><a href="../project/index.html">Brick Breaker Game</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Huvudinnehåll (main) med projektbeskrivning och funktioner -->
+    <main>
+        <!-- Sektion som beskriver spelet Brick Breaker -->
+        <div class="description">
+            <h2>Beskrivning av Spelet: Brick Breaker</h2>
+            <p>Brick Breaker är ett underhållande arkadspel där målet är att förstöra alla klossar på skärmen med hjälp av en boll och en paddel. Du styr paddeln med piltangenterna och försöker träffa bollen så att den studsar mot klossarna. Varje gång bollen träffar en kloss, försvinner den.</p>
+        </div>
+
+        <!-- Sektion som listar spelets nyckelfunktioner -->
+        <div class="features">
+            <h3>Nyckelfunktioner:</h3>
+            <ul>
+                <li><strong>Enkel Kontroller:</strong> Använd piltangenterna för att styra paddeln och hålla bollen i spel.</li>
+                <li><strong>Klassiskt Arkadspel:</strong> Försök att rensa alla klossar för att vinna spelet.</li>
+                <li><strong>Liv och Utmaning:</strong> Om bollen går förbi paddeln, förlorar du ett liv och bollen skickas iväg igen. Spelet fortsätter tills alla klossar är borta eller tills du har förlorat alla liv.</li>
+                <li><strong>Konstant Poängsystem:</strong> Få poäng varje gång du träffar en kloss, och se din totala poäng öka.</li>
+            </ul>
+        </div>
+
+        <!-- Sektion som beskriver projektet och dess syfte -->
+        <section class="hero">
+            <h2>Utforska tekniken bakom mitt projekt</h2>
+            <p>Hej och välkommen till min webbplats, som är resultatet av mitt projektarbete inom kursen Webbutveckling 2. Som en del av min kurs har jag haft möjlighet att fördjupa mig i teknik och verktyg inom webbutveckling, och här presenterar jag det arbete jag har genomfört.</p>
+            <hr>
+
+            <!-- Sektion som beskriver projektets syfte -->
+            <h3>Projektets Syfte</h3>
+            <p>Som slutprojekt för kursen har jag skapat en webbplats som visar min fördjupning inom JavaScript och interaktiv 2D-grafik med hjälp av Canvas och SVG. Genom att bygga en interaktiv applikation har jag kunnat utforska och implementera avancerade funktioner och tekniker som bidrar till en dynamisk användarupplevelse.</p>
+            <hr>
+
+            <!-- Sektion som ger en översikt över projektets innehåll -->
+            <h3>Projektöversikt</h3>
+            <ul>
+                <li><strong>Teknisk Presentation:</strong> En översikt över hur jag har använt JavaScript och Canvas för att skapa interaktiva element och visualiseringar.</li>
+                <li><strong>Steg-för-Steg:</strong> En vägledning som beskriver de viktigaste stegen i arbetsprocessen och hur projektet genomfördes.</li>
+                <li><strong>Redovisning:</strong> En utförlig genomgång av koden, resultaten, de utmaningar jag stött på, och hur jag löste dem.</li>
+                <li><strong>Källhänvisning:</strong> En lista över de resurser och referenser jag har använt för att stödja mitt arbete, samt en kort presentation av mig.</li>
+            </ul>
+            <hr>
+
+            <!-- Knapp för att starta spelet -->
+            <h3>Testa Spelet</h3>
+            <p>Som en del av mitt projekt har jag utvecklat ett interaktivt spel som du kan prova här. Klicka på knappen nedan för att starta spelet och se hur de tekniker och funktioner jag beskriver fungerar i praktiken.</p>
+            <a href="../project/index.html" class="button">Starta Spelet</a>
+        </section>
+    </main>
+
+    <!-- Sidfot (footer) med copyright-information -->
+    <footer>
+        <p>&copy; 2024 Mitt Projekt. Alla rättigheter förbehållna.</p>
+    </footer>
+</body>
+</html>
